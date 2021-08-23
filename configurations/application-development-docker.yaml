@@ -1,0 +1,22 @@
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://guest:guest@host.docker.internal:8011/eureka
+            
+spring:
+    security:
+        user:
+            name: guest
+            password: guest
+    datasource:
+        url: jdbc:mysql://host.docker.internal:3306/users_products_comments?serverTimezone=UTC
+        username: root
+        password: root
+    jpa:
+        hibernate:
+            ddl-auto: update
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
