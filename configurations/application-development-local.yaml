@@ -20,3 +20,12 @@ spring:
         port: 5672
         username: guest
         password: guest
+
+security:
+  claims:
+    header-autorities: Autorities
+  token:
+    value: secret
+    type: Bearer
+    header-name: token
+    validity: 18000000
