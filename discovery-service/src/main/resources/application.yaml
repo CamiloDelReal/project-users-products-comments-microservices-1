@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8011}
+
+spring:
+  application:
+    name: discovery-service
+  profiles:
+    active: ${CONFIG_PROFILE:development-local}
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8010}
+  cloud:
+    bus:
+      enabled: true
+  security:
+    user:
+      name: test
+      password: test
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+#logging.level.com.netflix.eureka=OFF
+#logging.level.com.netflix.discovery=OFF
+
