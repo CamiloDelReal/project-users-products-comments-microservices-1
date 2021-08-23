@@ -1,0 +1,30 @@
+server:
+  port: ${PORT:8012}
+
+spring:
+  application:
+    name: gateway-service
+  profiles:
+    active: ${CONFIG_PROFILE:development-local}
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8010}
+  cloud:
+    bus:
+      enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://test:test@localhost:8011/eureka
+
+# Must exposure only required uris
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
