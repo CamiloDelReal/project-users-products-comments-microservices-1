@@ -1,0 +1,26 @@
+server:
+  port: ${PORT:8010}
+
+spring:
+  application:
+    name: configuration-service
+  profiles:
+    active: ${CONFIG_PROFILE:native}
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: ${CONFIGURATION_PATH:D:\\workspace\\project-users-products-comments-microservices-1\\configurations}
+    bus:
+      enabled: true
+      refresh:
+        enabled: true
+      env:
+        enabled: true
+
+# Must exposure only required uris
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
