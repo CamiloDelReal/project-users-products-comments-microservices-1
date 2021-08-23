@@ -1,0 +1,46 @@
+server:
+  port: ${PORT:1106}
+
+spring:
+  application:
+    name: users-service
+  profiles:
+    active: ${CONFIG_PROFILE:development-local}
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8010}
+  cloud:
+    bus:
+      enabled: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test
+  datasource:
+    url: jdbc:mysql://localhost:3306/users_products_comments?serverTimezone=UTC
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+security:
+  claims:
+    header-autorities: Autorities
+  token:
+    value: 123
+    type: Test
+    header-name: token
+    validity: 18000000
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://test:test@localhost:8011/eureka
+
+# Must exposure only required uris
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
