@@ -68,7 +68,11 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)authResult.getPrincipal();
         String email = user.getUsername();
         Claims claims = Jwts.claims().setSubject(email);
-        claims.put(env.getProperty("security.claims.header-autorities"), user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(", ")));
+        String roles = user.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(env.getProperty("security.claims.separator")));
+        System.out.println("Roles inside token  " + roles);
+        claims.put(env.getProperty("security.claims.header-authorities"), roles);
         String key = env.getProperty("security.token.value");
         long issueAt = System.currentTimeMillis();
         String token = Jwts.builder()

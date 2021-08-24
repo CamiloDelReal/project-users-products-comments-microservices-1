@@ -23,9 +23,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
@@ -46,7 +48,6 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         if (authHeader != null && authHeader.startsWith(env.getProperty("security.token.type"))) {
             UsernamePasswordAuthenticationToken auth = getAuthentication(request);
             if(auth != null) {
-                logger.info("Setting auth inside context");
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } else {
                 response.setStatus(HttpServletResponse.SC_FORBIDDEN);
@@ -66,11 +67,12 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
             String token = authHeader.replace(env.getProperty("security.token.type"), "");
             String key = env.getProperty("security.token.value");
             try {
-                String email = Jwts.parser()
+                Claims claims = Jwts.parser()
                         .setSigningKey(key)
                         .parseClaimsJws(token)
-                        .getBody()
-                        .getSubject();
+                        .getBody();
+
+                String email = claims.getSubject();
 
                 if (email != null && !email.isEmpty()) {
                     User user = userService.getByEmail(email);

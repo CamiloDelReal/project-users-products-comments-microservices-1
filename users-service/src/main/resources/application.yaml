@@ -37,7 +37,8 @@ logging:
 
 security:
   claims:
-    header-autorities: Autorities
+    header-authorities: Autorities
+    separator: --
   token:
     value: 123
     type: Test

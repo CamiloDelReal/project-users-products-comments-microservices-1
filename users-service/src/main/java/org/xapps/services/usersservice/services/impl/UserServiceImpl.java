@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
@@ -40,6 +42,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     private AuthenticationManager authenticationManager;
     private Environment env;
     private UserRepository userRepository;
@@ -129,8 +132,12 @@ public class UserServiceImpl implements UserService {
                 authorities = new ArrayList<>();
             }
             SecurityContextHolder.getContext().setAuthentication(auth);
+            String rolesClaims = authorities.stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.joining(env.getProperty("security.claims.separator")));
+            logger.info("Roles inside token  " + rolesClaims);
             Claims claims = Jwts.claims().setSubject(loginRequest.getEmail());
-            claims.put(env.getProperty("security.claims.header-autorities"), AuthorityUtils.authorityListToSet(authorities));
+            claims.put(env.getProperty("security.claims.header-authorities"), rolesClaims);
             String key = env.getProperty("security.token.value");
             long issueAt = System.currentTimeMillis();
             String token = Jwts.builder()
@@ -152,6 +159,12 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email).orElse(null);
         if (user == null) throw new UsernameNotFoundException(email);
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getEncryptedPassword(), true, true, true, true, new ArrayList<>());
+        Collection<GrantedAuthority> authorities;
+        if(user != null) {
+            authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+        } else {
+            authorities = new ArrayList<>();
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getEncryptedPassword(), true, true, true, true, authorities);
     }
 }
