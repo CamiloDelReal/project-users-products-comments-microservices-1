@@ -151,7 +151,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"root@gmail.com\",\r\n    \"password\": \"root\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -211,7 +211,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Test2\",\r\n    \"lastName\": \"Test\",\r\n    \"email\": \"test1222344@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Test2\",\r\n    \"lastName\": \"Test\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -374,7 +374,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyMzE4OSwiZXhwIjoxNjI5ODQxMTg5fQ.6pWBM-CqG9Suob2RLQiX4_ImAw9_6ssc0eDENQ8tQVU",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyNzU0MiwiZXhwIjoxNjI5ODQ1NTQyfQ.Aksc_0MiN5LfHLOFnPC4aGrjP7kpmlVTnaOSjsPmBxk",
 									"type": "string"
 								}
 							]
@@ -412,7 +412,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiR3Vlc3QiXSwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyMTAxNywiZXhwIjoxNjI5ODM5MDE3fQ.FF_G9XWl5OHkyP5LuI8fSuxXfo6azFOeC41cEeEJXkU",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyNzU0MiwiZXhwIjoxNjI5ODQ1NTQyfQ.Aksc_0MiN5LfHLOFnPC4aGrjP7kpmlVTnaOSjsPmBxk",
 									"type": "string"
 								}
 							]
@@ -429,7 +429,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/categories/57",
+							"raw": "http://localhost:8012/categories/60",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -437,7 +437,7 @@
 							"port": "8012",
 							"path": [
 								"categories",
-								"57"
+								"60"
 							]
 						}
 					},
@@ -446,9 +446,30 @@
 				{
 					"name": "category delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyODk3OCwiZXhwIjoxNjI5ODQ2OTc4fQ.T6d4nw1DtpQg4lQFj2pApxFpLjRH99fdzRpPCdgmDas",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8012/categories/74",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"categories",
+								"74"
+							]
+						}
 					},
 					"response": []
 				},
@@ -477,7 +498,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products/1",
+							"raw": "http://localhost:8012/products/104",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -485,7 +506,114 @@
 							"port": "8012",
 							"path": [
 								"products",
-								"1"
+								"104"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyNzU0MiwiZXhwIjoxNjI5ODQ1NTQyfQ.Aksc_0MiN5LfHLOFnPC4aGrjP7kpmlVTnaOSjsPmBxk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test product\",\r\n    \"description\": \"Test description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyNzU0MiwiZXhwIjoxNjI5ODQ1NTQyfQ.Aksc_0MiN5LfHLOFnPC4aGrjP7kpmlVTnaOSjsPmBxk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test product 2\",\r\n    \"description\": \"Test description 2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/products/104",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"products",
+								"104"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "product delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJHdWVzdCIsImlzcyI6Iklzc3VlZCBieSBDYW1pbG8gZGVsIFJlYWwiLCJpYXQiOjE2Mjk4Mzc2MDgsImV4cCI6MTYyOTg1NTYwOH0.gvJfDQyHNE75jSrhnFvyNViGmsQ-fOoSzRMUPmZFsZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/products/104",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"products",
+								"104"
 							]
 						}
 					},
