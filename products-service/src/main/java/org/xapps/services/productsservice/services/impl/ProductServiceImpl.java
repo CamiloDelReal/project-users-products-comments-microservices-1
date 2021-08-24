@@ -3,7 +3,10 @@ package org.xapps.services.productsservice.services.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xapps.services.productsservice.dtos.CategoryResponse;
+import org.xapps.services.productsservice.dtos.ProductRequest;
 import org.xapps.services.productsservice.dtos.ProductResponse;
+import org.xapps.services.productsservice.entities.Category;
 import org.xapps.services.productsservice.entities.Product;
 import org.xapps.services.productsservice.repositories.ProductRepository;
 import org.xapps.services.productsservice.services.ProductService;
@@ -45,5 +48,42 @@ public class ProductServiceImpl implements ProductService {
             response = modelMapper.map(product, ProductResponse.class);
         }
         return response;
+    }
+
+    @Override
+    public ProductResponse create(ProductRequest request) {
+        Product product = modelMapper.map(request, Product.class);
+        ProductResponse response = null;
+        try {
+            productRepository.save(product);
+            response = modelMapper.map(product, ProductResponse.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public ProductResponse edit(Long id, ProductRequest request) {
+        Product product = productRepository.findById(id).orElse(null);
+        ProductResponse response = null;
+        if(product != null) {
+            product.setName(request.getName());
+            product.setDescription(request.getDescription());
+            productRepository.save(product);
+            response = modelMapper.map(product, ProductResponse.class);
+        }
+        return response;
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        Product product = productRepository.findById(id).orElse(null);
+        boolean success = false;
+        if(product != null) {
+            productRepository.deleteById(id);
+            success = true;
+        }
+        return success;
     }
 }

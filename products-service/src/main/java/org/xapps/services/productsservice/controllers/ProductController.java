@@ -1,16 +1,17 @@
 package org.xapps.services.productsservice.controllers;
 
+import brave.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import org.xapps.services.productsservice.dtos.ProductRequest;
 import org.xapps.services.productsservice.dtos.ProductResponse;
 import org.xapps.services.productsservice.services.ProductService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -37,6 +38,46 @@ public class ProductController {
         ResponseEntity<ProductResponse> response;
         if(productResponse != null) {
             response = new ResponseEntity<>(productResponse, HttpStatus.OK);
+        } else {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return response;
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("isAuthenticated() and hasAuthority('Administrator')")
+    public ResponseEntity<ProductResponse> createProduct(@Valid @RequestBody ProductRequest productRequest) {
+        ProductResponse productResponse = productService.create(productRequest);
+        ResponseEntity<ProductResponse> response;
+        if(productResponse != null) {
+            response = new ResponseEntity<>(productResponse, HttpStatus.OK);
+        } else {
+            // Sql error (name duplicity for example)
+            response = new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+        return response;
+    }
+
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PreAuthorize("isAuthenticated() and hasAuthority('Administrator')")
+    public ResponseEntity<ProductResponse> editProduct(@PathVariable("id") Long id, @Valid @RequestBody ProductRequest productRequest) {
+        ProductResponse productResponse = productService.edit(id, productRequest);
+        ResponseEntity<ProductResponse> response;
+        if(productResponse != null) {
+            response = new ResponseEntity<>(productResponse, HttpStatus.OK);
+        } else {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return response;
+    }
+
+    @DeleteMapping(path = "/{id}")
+    @PreAuthorize("isAuthenticated() and hasAuthority('Administrator')")
+    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Long id) {
+        boolean success = productService.deleteById(id);
+        ResponseEntity<Void> response;
+        if(success) {
+            response = new ResponseEntity<>(HttpStatus.OK);
         } else {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -3,6 +3,7 @@ package org.xapps.services.productsservice.services.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.xapps.services.productsservice.dtos.CategoryRequest;
 import org.xapps.services.productsservice.dtos.CategoryResponse;
 import org.xapps.services.productsservice.entities.Category;
@@ -74,8 +75,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(Long id) {
-        categoryRepository.deleteById(id);
-        return true;
+        Category category = categoryRepository.findById(id).orElse(null);
+        boolean success = false;
+        if(category != null) {
+            categoryRepository.deleteById(id);
+            success = true;
+        }
+        return success;
     }
 }

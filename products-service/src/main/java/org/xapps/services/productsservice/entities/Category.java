@@ -22,7 +22,10 @@ public class Category {
     @Column(name = "name", unique = true)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY, mappedBy = "categories")
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "categories_products",
+            joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     @JsonBackReference
     private List<Product> products;
 
