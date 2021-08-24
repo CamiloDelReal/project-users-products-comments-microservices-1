@@ -31,9 +31,20 @@
 				{
 					"name": "busrefresh",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8010/actuator/busrefresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"actuator",
+								"busrefresh"
+							]
+						}
 					},
 					"response": []
 				},
@@ -42,7 +53,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8010/status/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8010",
+							"path": [
+								"status",
+								"check"
+							]
+						}
 					},
 					"response": []
 				}
@@ -56,7 +78,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8011/status/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8011",
+							"path": [
+								"status",
+								"check"
+							]
+						}
 					},
 					"response": []
 				}
@@ -70,7 +103,18 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8012/status/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"status",
+								"check"
+							]
+						}
 					},
 					"response": []
 				}
@@ -84,34 +128,366 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8012/users/status/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users",
+								"status",
+								"check"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "login",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [],
-						"url": null
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"root@gmail.com\",\r\n    \"password\": \"root\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/users/security/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users",
+								"security",
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "get by id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiR3Vlc3QiXSwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTc5NzAzMiwiZXhwIjoxNjI5ODE1MDMyfQ.npbhyVbx5yrMRlJSIQWIJTEaO1OkwgoNIiUQBjkL1sg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8012/users/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users",
+								"5"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "create",
 					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Test2\",\r\n    \"lastName\": \"Test\",\r\n    \"email\": \"test1222344@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiQWRtaW5pc3RyYXRvciJdLCJpc3MiOiJJc3N1ZWQgYnkgQ2FtaWxvIGRlbCBSZWFsIiwiaWF0IjoxNjI5NzkwNzQ0LCJleHAiOjE2Mjk4MDg3NDR9.DrMvTsDDvBlUst08-r_-Mmu_gZx9LAWo7Cn1VsatT00",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Test3\",\r\n    \"lastName\": \"Test3\",\r\n    \"email\": \"test366@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/users/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiQWRtaW5pc3RyYXRvciJdLCJpc3MiOiJJc3N1ZWQgYnkgQ2FtaWxvIGRlbCBSZWFsIiwiaWF0IjoxNjI5NzkwNzQ0LCJleHAiOjE2Mjk4MDg3NDR9.DrMvTsDDvBlUst08-r_-Mmu_gZx9LAWo7Cn1VsatT00",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/users/19",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users",
+								"19"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "status/check",
+					"request": {
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/products/status/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"products",
+								"status",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categories get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/categories/26",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"categories",
+								"26"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyMzE4OSwiZXhwIjoxNjI5ODQxMTg5fQ.6pWBM-CqG9Suob2RLQiX4_ImAw9_6ssc0eDENQ8tQVU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/categories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiR3Vlc3QiXSwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyMTAxNywiZXhwIjoxNjI5ODM5MDE3fQ.FF_G9XWl5OHkyP5LuI8fSuxXfo6azFOeC41cEeEJXkU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test22222\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/categories/57",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"categories",
+								"57"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "category delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
 						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "products get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "products get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/products/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"products",
+								"1"
+							]
+						}
 					},
 					"response": []
 				}
