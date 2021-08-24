@@ -49,6 +49,13 @@ spring:
             - Method=GET
           filters:
             - RewritePath=/products/(?<segment>.*), /$\{segment}
+        - id: products-categories-get
+          uri: lb://products-service
+          predicates:
+            - Path=/categories/**, /products/**
+            - Method=GET
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
 
   rabbitmq:
     host: localhost
