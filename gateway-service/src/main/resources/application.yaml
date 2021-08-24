@@ -11,11 +11,44 @@ spring:
   cloud:
     bus:
       enabled: true
+
+    gateway:
+      routes:
+        - id: users-check
+          uri: lb://users-service
+          predicates:
+            - Path=/users/status/check
+            - Method=GET
+          filters:
+            - RewritePath=/users/(?<segment>.*), /$\{segment}
+        - id: users-create
+          uri: lb://users-service
+          predicates:
+            - Path=/users
+            - Method=POST
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+        - id: users-login
+          uri: lb://users-service
+          predicates:
+            - Path=/users/security/login
+            - Method=POST
+          filters:
+            - RewritePath=/users/(?<segment>.*), /$\{segment}
+        - id: users-edit-delete
+          uri: lb://users-service
+          predicates:
+            - Path=/users/*
+            - Method=GET,PUT,DELETE
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+
   rabbitmq:
     host: localhost
     port: 5672
     username: test
     password: test
+
 
 eureka:
   client:
