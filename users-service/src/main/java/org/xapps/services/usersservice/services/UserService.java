@@ -18,6 +18,8 @@ public interface UserService extends UserDetailsService {
 
     UserResponse  create(UserRequest userRequest);
 
+    UserResponse edit(Long id, UserRequest userRequest);
+
     LoginResponse authenticate(LoginRequest loginRequest);
 
     @Override

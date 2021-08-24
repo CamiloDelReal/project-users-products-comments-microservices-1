@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.xapps.services.usersservice.services.UserService;
@@ -39,7 +40,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/users").permitAll()
                 .anyRequest().permitAll()
-
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 // Authentication with basic uri /login with token in response header and authorization filter with request header token
 //                .and()
 //                .addFilter(providesAuthenticationFilter())
@@ -47,6 +49,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 // Authentication with custom uri /security/login with token in custom response object and authorization filter with request header token
                 .and()
                 .addFilter(providesAuthorizationFilter());
+                // Same as previous
+//                .addFilterBefore(providesAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         http.headers().frameOptions().disable();
     }

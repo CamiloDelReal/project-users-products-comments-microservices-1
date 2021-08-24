@@ -66,9 +66,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElse(null);
         UserResponse response = null;
         if(user != null) {
-            ModelMapper modelMapper2 = new ModelMapper();
-            modelMapper2.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-            response = modelMapper2.map(user, UserResponse.class);
+            response = modelMapper.map(user, UserResponse.class);
         }
         return response;
     }
@@ -81,6 +79,21 @@ public class UserServiceImpl implements UserService {
         entity.setRoles(List.of(guest));
         userRepository.save(entity);
         UserResponse response = modelMapper.map(entity, UserResponse.class);
+        return response;
+    }
+
+    @Override
+    public UserResponse edit(Long id, UserRequest userRequest) {
+        User entity = userRepository.findById(id).orElse(null);
+        UserResponse response = null;
+        if(entity != null) {
+            entity.setFirstName(userRequest.getFirstName());
+            entity.setLastName(userRequest.getLastName());
+            entity.setEmail(userRequest.getEmail());
+            entity.setEncryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
+            userRepository.save(entity);
+            response = modelMapper.map(entity, UserResponse.class);
+        }
         return response;
     }
 
