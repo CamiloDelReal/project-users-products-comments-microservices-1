@@ -25,7 +25,7 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Category> categories;
 

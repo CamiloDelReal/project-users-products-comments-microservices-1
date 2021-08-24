@@ -19,7 +19,7 @@ public class Category {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY, mappedBy = "categories")

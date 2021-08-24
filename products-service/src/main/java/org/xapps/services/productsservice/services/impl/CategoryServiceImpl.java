@@ -3,6 +3,7 @@ package org.xapps.services.productsservice.services.impl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.xapps.services.productsservice.dtos.CategoryRequest;
 import org.xapps.services.productsservice.dtos.CategoryResponse;
 import org.xapps.services.productsservice.entities.Category;
 import org.xapps.services.productsservice.repositories.CategoryRepository;
@@ -45,5 +46,36 @@ public class CategoryServiceImpl implements CategoryService {
             response = modelMapper.map(category, CategoryResponse.class);
         }
         return response;
+    }
+
+    @Override
+    public CategoryResponse create(CategoryRequest request) {
+        Category category = modelMapper.map(request, Category.class);
+        CategoryResponse response = null;
+        try {
+            categoryRepository.save(category);
+            response = modelMapper.map(category, CategoryResponse.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return response;
+    }
+
+    @Override
+    public CategoryResponse edit(Long id, CategoryRequest request) {
+        Category category = categoryRepository.findById(id).orElse(null);
+        CategoryResponse response = null;
+        if(category != null) {
+            category.setName(request.getName());
+            categoryRepository.save(category);
+            response = modelMapper.map(category, CategoryResponse.class);
+        }
+        return response;
+    }
+
+    @Override
+    public boolean deleteById(Long id) {
+        categoryRepository.deleteById(id);
+        return true;
     }
 }
