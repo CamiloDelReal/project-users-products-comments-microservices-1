@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.xapps.services.usersservice.dtos.UserRequest;
@@ -51,7 +49,8 @@ public class UserController {
         if(userResponse != null) {
             response = new ResponseEntity<>(userResponse, HttpStatus.CREATED);
         } else {
-            response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            // Sql error (email duplicity for example)
+            response = new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return response;
     }
@@ -65,6 +64,7 @@ public class UserController {
         if(userResponse != null) {
             response = new ResponseEntity<>(userResponse, HttpStatus.OK);
         } else {
+            // Not found or sql error (email duplicity for example)
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return response;

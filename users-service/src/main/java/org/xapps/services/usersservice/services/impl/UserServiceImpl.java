@@ -29,6 +29,7 @@ import org.xapps.services.usersservice.repositories.UserRepository;
 import org.xapps.services.usersservice.services.RoleService;
 import org.xapps.services.usersservice.services.UserService;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -73,26 +74,37 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse create(UserRequest userRequest) {
+        // This method should return a custom object with error code + response
         User entity = modelMapper.map(userRequest, User.class);
         entity.setEncryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
         Role guest = roleService.getByName("Guest");
         entity.setRoles(List.of(guest));
-        userRepository.save(entity);
-        UserResponse response = modelMapper.map(entity, UserResponse.class);
+        UserResponse response = null;
+        try {
+            userRepository.save(entity);
+            response = modelMapper.map(entity, UserResponse.class);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
         return response;
     }
 
     @Override
     public UserResponse edit(Long id, UserRequest userRequest) {
+        // This method should return a custom object with error code + response
         User entity = userRepository.findById(id).orElse(null);
         UserResponse response = null;
         if(entity != null) {
-            entity.setFirstName(userRequest.getFirstName());
-            entity.setLastName(userRequest.getLastName());
-            entity.setEmail(userRequest.getEmail());
-            entity.setEncryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
-            userRepository.save(entity);
-            response = modelMapper.map(entity, UserResponse.class);
+            try {
+                entity.setFirstName(userRequest.getFirstName());
+                entity.setLastName(userRequest.getLastName());
+                entity.setEmail(userRequest.getEmail());
+                entity.setEncryptedPassword(passwordEncoder.encode(userRequest.getPassword()));
+                userRepository.save(entity);
+                response = modelMapper.map(entity, UserResponse.class);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         return response;
     }
