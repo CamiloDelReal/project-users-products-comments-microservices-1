@@ -22,7 +22,7 @@ public class ServiceController {
     @GetMapping(path = "/check")
     public String check() {
         return "Users service running with\n" +
-                "\tPort: " + env.getProperty("server.port");
+                "\tPort: " + env.getProperty("local.server.port");
     }
 
 }

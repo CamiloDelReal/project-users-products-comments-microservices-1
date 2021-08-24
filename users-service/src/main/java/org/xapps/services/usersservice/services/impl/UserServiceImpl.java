@@ -98,6 +98,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean delete(Long id) {
+        userRepository.deleteById(id);
+        return true;
+    }
+
+    @Override
     public LoginResponse authenticate(LoginRequest loginRequest) {
         LoginResponse response = null;
         try {

@@ -70,4 +70,17 @@ public class UserController {
         return response;
     }
 
+    @DeleteMapping(path = "/{id}")
+    @PreAuthorize("isAuthenticated() and hasAuthority('Administrator') or isAuthenticated() and principal.id == #id")
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
+        boolean success = userService.delete(id);
+        ResponseEntity<Void> response;
+        if(success) {
+            response = new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return response;
+    }
+
 }
