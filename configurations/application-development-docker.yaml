@@ -23,7 +23,8 @@ spring:
 
 security:
     claims:
-        header-autorities: Autorities
+        header-authorities: Autorities
+        separator: --
     token:
         value: secret
         type: Bearer
