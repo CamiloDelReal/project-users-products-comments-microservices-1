@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.xapps.services.productsservice.dtos.UserAuthenticated;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -65,16 +66,18 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                         .parseClaimsJws(token)
                         .getBody();
 
-                String email = claims.getSubject();
+                String[] subjectData = claims.getSubject().split(env.getProperty("security.claims.separator"));
 
-                if(email != null && !email.isEmpty()) {
+
+                if(subjectData.length == 2 && !subjectData[0].isEmpty() && !subjectData[1].isEmpty()) {
+                    UserAuthenticated user = new UserAuthenticated(Long.parseLong(subjectData[0]), subjectData[1]);
                     String rolesClaim = claims.get(env.getProperty("security.claims.header-authorities"), String.class);
-                    logger.info("Roles inside token  " + rolesClaim);
-                    Collection<GrantedAuthority> roles = Stream.of(rolesClaim.split(env.getProperty("security.claims.separator")))
+                    user.setRoles(Stream.of(rolesClaim.split(env.getProperty("security.claims.separator"))).collect(Collectors.toList()));
+                    Collection<GrantedAuthority> roles = user.getRoles().stream()
                             .map(SimpleGrantedAuthority::new)
                             .collect(Collectors.toList());
                     roles.forEach(it -> System.out.println(it.getAuthority()));
-                    auth = new UsernamePasswordAuthenticationToken(email, null, roles);
+                    auth = new UsernamePasswordAuthenticationToken(user, null, roles);
                 }
             } catch (ExpiredJwtException ex) {
                 logger.error("Token expired");
