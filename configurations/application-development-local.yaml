@@ -42,6 +42,8 @@ security:
     logging:
         file:
             name: D:\\workspace\\project-users-products-comments-microservices-1\\logs\\${spring.application.name}.log
+        level:
+            root: DEBUG
 
 feign:
     circuitbreaker:
