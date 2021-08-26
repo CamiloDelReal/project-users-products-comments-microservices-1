@@ -42,3 +42,10 @@ security:
     logging:
         file:
             name: /logs/${spring.application.name}.log
+
+feign:
+    circuitbreaker:
+        enabled: true
+remote:
+    services:
+        comments: comments-service
