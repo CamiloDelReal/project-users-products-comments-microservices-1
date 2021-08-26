@@ -4,11 +4,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.xapps.services.productsservice.dtos.CategoryResponse;
+import org.xapps.services.productsservice.dtos.CommentResponse;
 import org.xapps.services.productsservice.dtos.ProductRequest;
 import org.xapps.services.productsservice.dtos.ProductResponse;
 import org.xapps.services.productsservice.entities.Category;
 import org.xapps.services.productsservice.entities.Product;
 import org.xapps.services.productsservice.repositories.ProductRepository;
+import org.xapps.services.productsservice.services.CommentService;
 import org.xapps.services.productsservice.services.ProductService;
 
 import java.util.ArrayList;
@@ -21,11 +23,13 @@ public class ProductServiceImpl implements ProductService {
 
     private ModelMapper modelMapper;
     private ProductRepository productRepository;
+    private CommentService commentService;
 
     @Autowired
-    public ProductServiceImpl(ModelMapper modelMapper, ProductRepository productRepository) {
+    public ProductServiceImpl(ModelMapper modelMapper, ProductRepository productRepository, CommentService commentService) {
         this.modelMapper = modelMapper;
         this.productRepository = productRepository;
+        this.commentService = commentService;
     }
 
     @Override
@@ -46,6 +50,8 @@ public class ProductServiceImpl implements ProductService {
         ProductResponse response = null;
         if(product != null) {
             response = modelMapper.map(product, ProductResponse.class);
+            List<CommentResponse> comments = commentService.getCommentByProductId(id);
+            response.setComments(comments);
         }
         return response;
     }

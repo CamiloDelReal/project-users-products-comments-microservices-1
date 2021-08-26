@@ -49,6 +49,12 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://test:test@localhost:8011/eureka
+feign:
+  circuitbreaker:
+    enabled: true
+remote:
+  services:
+    comments: comments-service
 
 # Must exposure only required uris
 management:
