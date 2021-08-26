@@ -139,11 +139,12 @@ public class UserServiceImpl implements UserService {
             Claims claims = Jwts.claims().setSubject(loginRequest.getEmail());
             claims.put(env.getProperty("security.claims.header-authorities"), rolesClaims);
             String key = env.getProperty("security.token.value");
+            String subject = String.join(env.getProperty("security.claims.separator"), String.valueOf(user.getId()), user.getEmail());
             long issueAt = System.currentTimeMillis();
             String token = Jwts.builder()
                     .setClaims(claims)
                     .setIssuer("Issued by Camilo del Real")
-                    .setSubject(loginRequest.getEmail())
+                    .setSubject(subject)
                     .setIssuedAt(new Date(issueAt))
                     .setExpiration(new Date(issueAt + Long.parseLong(env.getProperty("security.token.validity"))))
                     .signWith(SignatureAlgorithm.HS256, key)

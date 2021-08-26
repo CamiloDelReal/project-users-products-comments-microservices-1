@@ -67,6 +67,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             throws IOException, ServletException {
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)authResult.getPrincipal();
         String email = user.getUsername();
+        User userEntity = userService.getByEmail(email);
         Claims claims = Jwts.claims().setSubject(email);
         String roles = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
@@ -74,11 +75,13 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         System.out.println("Roles inside token  " + roles);
         claims.put(env.getProperty("security.claims.header-authorities"), roles);
         String key = env.getProperty("security.token.value");
+        String subject = String.join(env.getProperty("security.claims.separator"), String.valueOf(userEntity.getId()), email);
+        System.out.println("Subject " + subject);
         long issueAt = System.currentTimeMillis();
         String token = Jwts.builder()
                 .setClaims(claims)
                 .setIssuer("Issued by Camilo del Real")
-                .setSubject(email)
+                .setSubject(subject)
                 .setIssuedAt(new Date(issueAt))
                 .setExpiration(new Date(issueAt + Long.parseLong(env.getProperty("security.token.validity"))))
                 .signWith(SignatureAlgorithm.HS256, key)

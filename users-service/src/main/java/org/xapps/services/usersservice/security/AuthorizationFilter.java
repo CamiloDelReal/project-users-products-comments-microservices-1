@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,11 +22,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
@@ -72,10 +69,10 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
                         .parseClaimsJws(token)
                         .getBody();
 
-                String email = claims.getSubject();
+                String[] subjectData = claims.getSubject().split(env.getProperty("security.claims.separator"));
 
-                if (email != null && !email.isEmpty()) {
-                    User user = userService.getByEmail(email);
+                if(subjectData.length == 2 && !subjectData[0].isEmpty() && !subjectData[1].isEmpty()) {
+                    User user = userService.getByEmail(subjectData[1]);
                     if(user != null) {
                         List<GrantedAuthority> authorities = user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
                         auth = new UsernamePasswordAuthenticationToken(user, null, authorities);
