@@ -72,11 +72,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         String roles = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(env.getProperty("security.claims.separator")));
-        System.out.println("Roles inside token  " + roles);
         claims.put(env.getProperty("security.claims.header-authorities"), roles);
         String key = env.getProperty("security.token.value");
         String subject = String.join(env.getProperty("security.claims.separator"), String.valueOf(userEntity.getId()), email);
-        System.out.println("Subject " + subject);
         long issueAt = System.currentTimeMillis();
         String token = Jwts.builder()
                 .setClaims(claims)
