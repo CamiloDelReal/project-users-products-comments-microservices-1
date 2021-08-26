@@ -35,7 +35,7 @@ spring:
             - Method=POST
           filters:
             - RewritePath=/users/(?<segment>.*), /$\{segment}
-        - id: users-edit-delete
+        - id: users-get-edit-delete
           uri: lb://users-service
           predicates:
             - Path=/users/*
@@ -52,15 +52,57 @@ spring:
         - id: products-categories-get
           uri: lb://products-service
           predicates:
-            - Path=/categories/**, /products/**
+            - Path=/categories, /categories/*, /products, /products/*
             - Method=GET
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
-        - id: product-post-put
+        - id: products-post-put
           uri: lb://products-service
           predicates:
-            - Path=/categories/**, /products/**
+            - Path=/categories, /categories/*, /products, /products/*
             - Method=POST,PUT,DELETE
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+        - id: comments-check
+          uri: lb://comments-service
+          predicates:
+          - Path=/comments/status/check
+          - Method=GET
+          filters:
+          - RewritePath=/comments/(?<segment>.*), /$\{segment}
+        - id: comments-get-by-user
+          uri: lb://comments-service
+          predicates:
+          - Path=/users/*/comments
+          - Method=GET
+          filters:
+          - RewritePath=/users/(?<userId>.*)/comments, /users/$\{userId}/comments
+        - id: comments-by-product
+          uri: lb://comments-service
+          predicates:
+          - Path=/products/*/comments
+          - Method=GET
+          filters:
+          - RewritePath=/products/(?<productId>.*)/comments, /products/$\{productId}/comments
+        - id: comments-by-user-by-product
+          uri: lb://comments-service
+          predicates:
+          - Path=/users/*/products/*/comments
+          - Method=GET
+          filters:
+          - RewritePath=/users/(?<userId>.*)/products/(?<productId>.*)/comments, /users/$\{userId}/products/$\{productId}/comments
+        - id: comments-post
+          uri: lb://comments-service
+          predicates:
+          - Path=/comments
+          - Method=POST
+          filters:
+            - RewritePath=/comments, /comments
+        - id: comments-put-delete
+          uri: lb://comments-service
+          predicates:
+            - Path=/comments/*
+            - Method=PUT,DELETE
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
