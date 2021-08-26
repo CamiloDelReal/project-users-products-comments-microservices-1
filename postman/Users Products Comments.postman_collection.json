@@ -352,7 +352,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/categories/26",
+							"raw": "http://localhost:8012/categories/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -360,7 +360,7 @@
 							"port": "8012",
 							"path": [
 								"categories",
-								"26"
+								"1"
 							]
 						}
 					},
@@ -498,7 +498,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products/104",
+							"raw": "http://localhost:8012/products/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -506,7 +506,7 @@
 							"port": "8012",
 							"path": [
 								"products",
-								"104"
+								"6"
 							]
 						}
 					},
@@ -616,6 +616,124 @@
 								"104"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "status/check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/comments/status/check",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"comments",
+								"status",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments by user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/users/1/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments by product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/products/1/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"products",
+								"1",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments by user and product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8012/users/1/products/3/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"users",
+								"1",
+								"products",
+								"3",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comment create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "comment edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "comment delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}
