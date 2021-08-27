@@ -65,5 +65,5 @@ Microservices-based application to practice
 ### Others
 - Local and Local Docker deployment configuration files
 - Docker files to deployment inside docker
-
+- You may need to configure some paths, credentials and urls inside configuration files based on you environment
 
