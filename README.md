@@ -21,17 +21,17 @@ Microservices-based application to practice
   
 ### Class diagram
 <p float="left">
-<img src="https://github.com/CamiloDelReal/project-users-products-comments-microservices-1/blob/main/specs/exported/Class%20Diagram.png" width="30%" height="30%" />
+<img src="https://github.com/CamiloDelReal/project-users-products-comments-microservices-1/blob/main/specs/exported/Class%20Diagram.png" width="50%" height="50%" />
 </p>
 
 ### Entity relationship diagram
 <p float="left">
-<img src="https://github.com/CamiloDelReal/project-users-products-comments-microservices-1/blob/main/specs/exported/Entity%20Relationship%20Diagram.png" width="30%" height="30%" />
+<img src="https://github.com/CamiloDelReal/project-users-products-comments-microservices-1/blob/main/specs/exported/Entity%20Relationship%20Diagram.png" width="50%" height="50%" />
 </p>
 
 ### Deployment diagram
 <p float="left">
-<img src="https://github.com/CamiloDelReal/project-users-products-comments-microservices-1/blob/main/specs/exported/Deployment%20Diagram.png" width="30%" height="30%" />
+<img src="https://github.com/CamiloDelReal/project-users-products-comments-microservices-1/blob/main/specs/exported/Deployment%20Diagram.png" width="50%" height="50%" />
 </p>
 
 ### Technologies used
