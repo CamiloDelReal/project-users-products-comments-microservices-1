@@ -151,7 +151,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -182,7 +182,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiR3Vlc3QiXSwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTc5NzAzMiwiZXhwIjoxNjI5ODE1MDMyfQ.npbhyVbx5yrMRlJSIQWIJTEaO1OkwgoNIiUQBjkL1sg",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNC0tcm9vdEBnbWFpbC5jb20iLCJBdXRvcml0aWVzIjoiQWRtaW5pc3RyYXRvciIsImlzcyI6Iklzc3VlZCBieSBDYW1pbG8gZGVsIFJlYWwiLCJpYXQiOjE2Mjk5NjE0NjIsImV4cCI6MTYyOTk3OTQ2Mn0.aSr9DMhljnvzG6o0KK9gCZi0FrjXsHVK7up1qLQo2uU",
 									"type": "string"
 								}
 							]
@@ -190,7 +190,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/5",
+							"raw": "http://localhost:8012/users/39",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -198,7 +198,7 @@
 							"port": "8012",
 							"path": [
 								"users",
-								"5"
+								"39"
 							]
 						}
 					},
@@ -211,7 +211,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Test2\",\r\n    \"lastName\": \"Test\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Test2\",\r\n    \"lastName\": \"Test2\",\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,7 +240,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiQWRtaW5pc3RyYXRvciJdLCJpc3MiOiJJc3N1ZWQgYnkgQ2FtaWxvIGRlbCBSZWFsIiwiaWF0IjoxNjI5NzkwNzQ0LCJleHAiOjE2Mjk4MDg3NDR9.DrMvTsDDvBlUst08-r_-Mmu_gZx9LAWo7Cn1VsatT00",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNC0tcm9vdEBnbWFpbC5jb20iLCJBdXRvcml0aWVzIjoiQWRtaW5pc3RyYXRvciIsImlzcyI6Iklzc3VlZCBieSBDYW1pbG8gZGVsIFJlYWwiLCJpYXQiOjE2Mjk5NjE0NjIsImV4cCI6MTYyOTk3OTQ2Mn0.aSr9DMhljnvzG6o0KK9gCZi0FrjXsHVK7up1qLQo2uU",
 									"type": "string"
 								}
 							]
@@ -257,7 +257,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/users/6",
+							"raw": "http://localhost:8012/users/39",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -265,7 +265,7 @@
 							"port": "8012",
 							"path": [
 								"users",
-								"6"
+								"39"
 							]
 						}
 					},
@@ -279,7 +279,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOlsiQWRtaW5pc3RyYXRvciJdLCJpc3MiOiJJc3N1ZWQgYnkgQ2FtaWxvIGRlbCBSZWFsIiwiaWF0IjoxNjI5NzkwNzQ0LCJleHAiOjE2Mjk4MDg3NDR9.DrMvTsDDvBlUst08-r_-Mmu_gZx9LAWo7Cn1VsatT00",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNC0tcm9vdEBnbWFpbC5jb20iLCJBdXRvcml0aWVzIjoiQWRtaW5pc3RyYXRvciIsImlzcyI6Iklzc3VlZCBieSBDYW1pbG8gZGVsIFJlYWwiLCJpYXQiOjE2Mjk5NjE0NjIsImV4cCI6MTYyOTk3OTQ2Mn0.aSr9DMhljnvzG6o0KK9gCZi0FrjXsHVK7up1qLQo2uU",
 									"type": "string"
 								}
 							]
@@ -287,7 +287,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/19",
+							"raw": "http://localhost:8012/users/39",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -295,7 +295,7 @@
 							"port": "8012",
 							"path": [
 								"users",
-								"19"
+								"39"
 							]
 						}
 					},
@@ -374,7 +374,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyNzU0MiwiZXhwIjoxNjI5ODQ1NTQyfQ.Aksc_0MiN5LfHLOFnPC4aGrjP7kpmlVTnaOSjsPmBxk",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNC0tcm9vdEBnbWFpbC5jb20iLCJBdXRvcml0aWVzIjoiQWRtaW5pc3RyYXRvciIsImlzcyI6Iklzc3VlZCBieSBDYW1pbG8gZGVsIFJlYWwiLCJpYXQiOjE2Mjk5MjM4NjQsImV4cCI6MTYyOTk0MTg2NH0.zb64kcIMkDW7ZRROq7L4ymmmzylCadG6hQ6OTlhRoek",
 									"type": "string"
 								}
 							]
@@ -383,7 +383,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Test2\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Test222\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -412,7 +412,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTgyNzU0MiwiZXhwIjoxNjI5ODQ1NTQyfQ.Aksc_0MiN5LfHLOFnPC4aGrjP7kpmlVTnaOSjsPmBxk",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyb290QGdtYWlsLmNvbSIsIkF1dG9yaXRpZXMiOiJBZG1pbmlzdHJhdG9yIiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTkyMjg0MiwiZXhwIjoxNjI5OTQwODQyfQ.qWEvN7K-aakAbCFiV6BGkH6G7AmMwXb0tOIEvd2aJmk",
 									"type": "string"
 								}
 							]
@@ -429,7 +429,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/categories/60",
+							"raw": "http://localhost:8012/categories/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -437,7 +437,7 @@
 							"port": "8012",
 							"path": [
 								"categories",
-								"60"
+								"1"
 							]
 						}
 					},
@@ -648,10 +648,20 @@
 				{
 					"name": "comments by user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNC0tcm9vdEBnbWFpbC5jb20iLCJBdXRvcml0aWVzIjoiQWRtaW5pc3RyYXRvciIsImlzcyI6Iklzc3VlZCBieSBDYW1pbG8gZGVsIFJlYWwiLCJpYXQiOjE2Mjk5NjE3NDgsImV4cCI6MTYyOTk3OTc0OH0.EmwWeDPUeGrWMoQh2pZAUQ1IXbxx4th5v-SKORlRc1E",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/1/comments",
+							"raw": "http://localhost:8012/users/40/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -659,7 +669,7 @@
 							"port": "8012",
 							"path": [
 								"users",
-								"1",
+								"40",
 								"comments"
 							]
 						}
@@ -672,7 +682,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products/1/comments",
+							"raw": "http://localhost:8012/products/6/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -680,7 +690,7 @@
 							"port": "8012",
 							"path": [
 								"products",
-								"1",
+								"6",
 								"comments"
 							]
 						}
@@ -693,7 +703,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/1/products/3/comments",
+							"raw": "http://localhost:8012/users/39/products/6/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -701,9 +711,9 @@
 							"port": "8012",
 							"path": [
 								"users",
-								"1",
+								"39",
 								"products",
-								"3",
+								"6",
 								"comments"
 							]
 						}
@@ -713,27 +723,107 @@
 				{
 					"name": "comment create",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0MC0tdGVzdEBnbWFpbC5jb20iLCJBdXRvcml0aWVzIjoiR3Vlc3QiLCJpc3MiOiJJc3N1ZWQgYnkgQ2FtaWxvIGRlbCBSZWFsIiwiaWF0IjoxNjI5OTYxNzIyLCJleHAiOjE2Mjk5Nzk3MjJ9.lDeQ4bIrYp06hOdO46RL8kjIngupUDdmPNngWdFitIk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
-						"url": null
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 40,\r\n    \"productId\": 6,\r\n    \"text\": \"This bed is from guest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"comments"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "comment edit",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0OS0tdGVzdDJAZ21haWwuY29tIiwiQXV0b3JpdGllcyI6Ikd1ZXN0IiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTk2NjA4OSwiZXhwIjoxNjI5OTg0MDg5fQ.VIaQ9vIFiW_4_LPxt8efjQQ5ZmzSMSHZg5OHfxvcSX8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
-						"url": null
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"This bed is from guest modified for guest and now for admin and trying for another guest\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8012/comments/48",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"comments",
+								"48"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "comment delete",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI0OS0tdGVzdDJAZ21haWwuY29tIiwiQXV0b3JpdGllcyI6Ikd1ZXN0IiwiaXNzIjoiSXNzdWVkIGJ5IENhbWlsbyBkZWwgUmVhbCIsImlhdCI6MTYyOTk2NjA4OSwiZXhwIjoxNjI5OTg0MDg5fQ.VIaQ9vIFiW_4_LPxt8efjQQ5ZmzSMSHZg5OHfxvcSX8",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
-						"url": null
+						"url": {
+							"raw": "http://localhost:8012/comments/48",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8012",
+							"path": [
+								"comments",
+								"48"
+							]
+						}
 					},
 					"response": []
 				}
