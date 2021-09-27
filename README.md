@@ -1,5 +1,5 @@
-# Users, products and comments
-Microservices-based application to practice
+# Users, products and comments v1
+Microservices-based application to practice. 
 
 ### Features
 - Users service
@@ -52,7 +52,7 @@ Microservices-based application to practice
 - Eureka
   * Discovery service provider
 - Hytrix
-	* Circuit breaker [Deprecated, check the updated project](link pending)
+	* Circuit breaker [Deprecated, check the updated project](https://github.com/CamiloDelReal/project-users-products-comments-microservices-2)
 - RabbitMQ
 	* Bus communication to update configuration in client services
 - Sleuth and Zipkin
