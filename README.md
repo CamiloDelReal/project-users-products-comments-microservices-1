@@ -1,5 +1,5 @@
 # Users, products and comments v1
-Microservices-based application to practice. 
+Microservices-based application 
 
 ### Features
 - Users service
