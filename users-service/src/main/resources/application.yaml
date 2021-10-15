@@ -33,7 +33,7 @@ spring:
 
 logging:
   file:
-    name: D:\\workspace\\project-users-products-comments-microservices-1\\logs\\${spring.application.name}.log
+    name: ${spring.application.name}.log
 
 security:
   claims:

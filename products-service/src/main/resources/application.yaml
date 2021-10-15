@@ -17,9 +17,9 @@ spring:
     username: test
     password: test
   datasource:
-    url: jdbc:mysql://localhost:3306/users_products_comments?serverTimezone=UTC
-    username: test
-    password: test
+    url: jdbc:mysql://localhost:13306/users_products_comments?serverTimezone=UTC
+    username: root
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
