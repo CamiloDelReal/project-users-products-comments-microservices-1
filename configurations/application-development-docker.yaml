@@ -1,7 +1,7 @@
 eureka:
     client:
         serviceUrl:
-            defaultZone: http://guest:guest@host.docker.internal:8011/eureka
+            defaultZone: http://guest:guest@discovery:10200/eureka
             
 spring:
     security:
@@ -9,14 +9,14 @@ spring:
             name: guest
             password: guest
     datasource:
-        url: jdbc:mysql://host.docker.internal:3306/users_products_comments?serverTimezone=UTC
+        url: jdbc:mysql://database:3306/users_products_comments?serverTimezone=UTC
         username: root
         password: root
     jpa:
         hibernate:
             ddl-auto: update
     rabbitmq:
-        host: host.docker.internal
+        host: rabbitmq
         port: 5672
         username: guest
         password: guest
@@ -32,7 +32,7 @@ security:
         validity: 18000000
 
     zipkin:
-        base-url: http://host.docker.internal:9411
+        base-url: http://zipkin:9411
         sender:
         type: web
     sleuth:
@@ -41,7 +41,7 @@ security:
 
     logging:
         file:
-            name: /logs/${spring.application.name}.log
+            name: /${spring.application.name}.log
         level:
             root: DEBUG
         
