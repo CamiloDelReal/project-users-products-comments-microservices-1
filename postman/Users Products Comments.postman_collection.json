@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "81da2848-79dc-42e0-9d1e-6b2f7df2dab0",
+		"_postman_id": "c13fbcca-0651-4ab3-aaca-dddcb2276ee4",
 		"name": "Users Products Comments",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,12 +14,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8010/actuator/bus-refresh",
+							"raw": "http://localhost:10100/actuator/bus-refresh",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8010",
+							"port": "10100",
 							"path": [
 								"actuator",
 								"bus-refresh"
@@ -34,12 +34,12 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8010/actuator/busrefresh",
+							"raw": "http://localhost:10100/actuator/busrefresh",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8010",
+							"port": "10100",
 							"path": [
 								"actuator",
 								"busrefresh"
@@ -54,12 +54,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8010/status/check",
+							"raw": "http://localhost:10100/status/check",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8010",
+							"port": "10100",
 							"path": [
 								"status",
 								"check"
@@ -79,12 +79,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8011/status/check",
+							"raw": "http://localhost:10200/status/check",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8011",
+							"port": "10200",
 							"path": [
 								"status",
 								"check"
@@ -104,12 +104,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/status/check",
+							"raw": "http://localhost:10300/status/check",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"status",
 								"check"
@@ -129,12 +129,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/status/check",
+							"raw": "http://localhost:10300/users/status/check",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users",
 								"status",
@@ -151,7 +151,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"test2@gmail.com\",\r\n    \"password\": \"test\"\r\n}",
+							"raw": "{\r\n    \"email\": \"root@gmail.com\",\r\n    \"password\": \"root\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,12 +159,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/users/security/login",
+							"raw": "http://localhost:10300/users/security/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users",
 								"security",
@@ -190,15 +190,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/39",
+							"raw": "http://localhost:10300/users/35",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users",
-								"39"
+								"35"
 							]
 						}
 					},
@@ -219,12 +219,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/users",
+							"raw": "http://localhost:10300/users",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users"
 							]
@@ -257,12 +257,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/users/39",
+							"raw": "http://localhost:10300/users/39",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users",
 								"39"
@@ -287,12 +287,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/39",
+							"raw": "http://localhost:10300/users/39",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users",
 								"39"
@@ -312,12 +312,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products/status/check",
+							"raw": "http://localhost:10300/products/status/check",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"products",
 								"status",
@@ -333,12 +333,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/categories",
+							"raw": "http://localhost:10300/categories",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"categories"
 							]
@@ -352,12 +352,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/categories/1",
+							"raw": "http://localhost:10300/categories/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"categories",
 								"1"
@@ -391,12 +391,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/categories",
+							"raw": "http://localhost:10300/categories",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"categories"
 							]
@@ -429,12 +429,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/categories/1",
+							"raw": "http://localhost:10300/categories/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"categories",
 								"1"
@@ -459,12 +459,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/categories/74",
+							"raw": "http://localhost:10300/categories/74",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"categories",
 								"74"
@@ -479,12 +479,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products",
+							"raw": "http://localhost:10300/products",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"products"
 							]
@@ -498,12 +498,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products/6",
+							"raw": "http://localhost:10300/products/6",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"products",
 								"6"
@@ -537,12 +537,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/products",
+							"raw": "http://localhost:10300/products",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"products"
 							]
@@ -575,12 +575,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/products/104",
+							"raw": "http://localhost:10300/products/104",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"products",
 								"104"
@@ -605,12 +605,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products/104",
+							"raw": "http://localhost:10300/products/104",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"products",
 								"104"
@@ -630,12 +630,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/comments/status/check",
+							"raw": "http://localhost:10300/comments/status/check",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"comments",
 								"status",
@@ -661,12 +661,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/40/comments",
+							"raw": "http://localhost:10300/users/40/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users",
 								"40",
@@ -682,12 +682,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/products/6/comments",
+							"raw": "http://localhost:10300/products/6/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"products",
 								"6",
@@ -703,12 +703,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/users/39/products/6/comments",
+							"raw": "http://localhost:10300/users/39/products/6/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"users",
 								"39",
@@ -745,12 +745,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/comments",
+							"raw": "http://localhost:10300/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"comments"
 							]
@@ -783,12 +783,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8012/comments/48",
+							"raw": "http://localhost:10300/comments/48",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"comments",
 								"48"
@@ -813,12 +813,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8012/comments/48",
+							"raw": "http://localhost:10300/comments/48",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8012",
+							"port": "10300",
 							"path": [
 								"comments",
 								"48"
