@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8011}
+  port: ${PORT:10200}
 
 spring:
   application:
@@ -7,7 +7,7 @@ spring:
   profiles:
     active: ${CONFIG_PROFILE:development-local}
   config:
-    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8010}
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:10100}
   cloud:
     bus:
       enabled: true

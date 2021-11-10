@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8012}
+  port: ${PORT:10300}
 
 spring:
   application:
@@ -7,7 +7,7 @@ spring:
   profiles:
     active: ${CONFIG_PROFILE:development-local}
   config:
-    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8010}
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:10100}
   cloud:
     bus:
       enabled: true
@@ -116,7 +116,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://test:test@localhost:8011/eureka
+      defaultZone: http://test:test@localhost:10200/eureka
 
 # Must exposure only required uris
 management:

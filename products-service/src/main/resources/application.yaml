@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:0}
+  port: ${PORT:10500}
 
 spring:
   application:
@@ -7,7 +7,7 @@ spring:
   profiles:
     active: ${CONFIG_PROFILE:development-local}
   config:
-    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8010}
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:10100}
   cloud:
     bus:
       enabled: true
@@ -17,7 +17,7 @@ spring:
     username: test
     password: test
   datasource:
-    url: jdbc:mysql://localhost:13306/users_products_comments?serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/users_products_comments?serverTimezone=UTC
     username: root
     password: root
   jpa:
@@ -48,7 +48,7 @@ security:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://test:test@localhost:8011/eureka
+      defaultZone: http://test:test@localhost:10200/eureka
 feign:
   circuitbreaker:
     enabled: true
