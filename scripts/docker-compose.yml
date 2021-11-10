@@ -1,0 +1,235 @@
+version: "3.8"
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    mem_limit: 700m
+    hostname: rabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - microservices1
+      
+  zipkin:
+    image: openzipkin/zipkin
+    mem_limit: 700m
+    hostname: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - microservices1
+
+  database:
+    image: mysql
+    mem_limit: 700m
+    hostname: database
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: users_products_comments
+      MYSQL_ROOT_PASSWORD: root
+    networks:
+      - microservices1
+
+  configuration:
+    image: dockersentinel/configuration-server
+    mem_limit: 700m
+    depends_on:
+      - zipkin
+      - rabbitmq
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      WAIT_HOSTS: zipkin:9411, rabbitmq:5672
+      SPRING_PROFILES_ACTIVE: native
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS: /configurations
+    volumes:
+      - "D:/workspace/project-users-products-comments-microservices-1/configurations:/configurations"
+    ports:
+      - "10100:10100"
+    hostname: configuration
+    networks:
+      - microservices1
+
+  discovery:
+    image: dockersentinel/discovery-service
+    mem_limit: 700m
+    depends_on:
+      - configuration
+      - rabbitmq
+      - zipkin
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      WAIT_HOSTS: configuration:10100
+      SPRING_PROFILES_ACTIVE: development-docker
+      SPRING_CONFIG_IMPORT: configserver:http://configuration:10100/
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    ports:
+      - "10200:10200"
+    hostname: discovery
+    networks:
+      - microservices1
+
+  gateway:
+    image: dockersentinel/gateway-service
+    mem_limit: 700m
+    depends_on:
+      - configuration
+      - discovery
+      - rabbitmq
+      - zipkin
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      WAIT_HOSTS: configuration:10100
+      SPRING_PROFILES_ACTIVE: development-docker
+      SPRING_CONFIG_IMPORT: configserver:http://configuration:10100/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://guest:guest@discovery:10200/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    ports:
+      - "10300:10300"
+    hostname: gateway
+    networks:
+      - microservices1
+
+  users:
+    image: dockersentinel/users-service
+    mem_limit: 700m
+    depends_on:
+      - configuration
+      - discovery
+      - gateway
+      - rabbitmq
+      - zipkin
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      WAIT_HOSTS: configuration:10100, discovery:10200, gateway:10300, database:3306
+      SPRING_PROFILES_ACTIVE: development-docker
+      SPRING_CONFIG_IMPORT: configserver:http://configuration:10100/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://guest:guest@discovery:10200/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/users_products_comments?serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      LOGGING_FILE_NAME: /logs/users-service.log
+    volumes:
+      - "D:/workspace/project-users-products-comments-microservices-1/logs/users-service.log:/logs/users-service.log"
+    ports:
+      - "10400:10400"
+    hostname: users
+    networks:
+      - microservices1
+
+  products:
+    image: dockersentinel/products-service
+    mem_limit: 700m
+    depends_on:
+      - configuration
+      - discovery
+      - gateway
+      - rabbitmq
+      - zipkin
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      WAIT_HOSTS: configuration:10100, discovery:10200, gateway:10300, database:3306
+      SPRING_PROFILES_ACTIVE: development-docker
+      SPRING_CONFIG_IMPORT: configserver:http://configuration:10100/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://guest:guest@discovery:10200/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/users_products_comments?serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      LOGGING_FILE_NAME: /logs/products-service.log
+    volumes:
+      - "D:/workspace/project-users-products-comments-microservices-1/logs/products-service.log:/logs/products-service.log"
+    ports:
+      - "10500:10500"
+    hostname: products
+    networks:
+      - microservices1
+
+  comments:
+    image: dockersentinel/comments-service
+    mem_limit: 700m
+    depends_on:
+      - configuration
+      - discovery
+      - gateway
+      - rabbitmq
+      - zipkin
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      WAIT_HOSTS: configuration:10100, discovery:10200, gateway:10300, database:3306
+      SPRING_PROFILES_ACTIVE: development-docker
+      SPRING_CONFIG_IMPORT: configserver:http://configuration:10100/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://guest:guest@discovery:10200/eureka
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/users_products_comments?serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      LOGGING_FILE_NAME: /logs/comments-service.log
+    volumes:
+      - "D:/workspace/project-users-products-comments-microservices-1/logs/comments-service.log:/logs/comments-service.log"
+    ports:
+      - "10600:10600"
+    hostname: comments
+    networks:
+      - microservices1
+
+networks:
+  microservices1:
