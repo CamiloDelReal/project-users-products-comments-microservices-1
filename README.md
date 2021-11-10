@@ -63,7 +63,8 @@ Microservices-based application
 - Model Mapper
 
 ### Others
-- Local and Local Docker deployment configuration files
-- Docker files to deployment inside docker
+- Script for packaging services
+- Script for building docker images for services
+- Docker compose deployment script
 - You may need to configure some paths, credentials and urls inside configuration files based on you environment
 
