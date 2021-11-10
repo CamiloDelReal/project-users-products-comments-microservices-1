@@ -1,3 +1,6 @@
-FROM openjdk:11
-COPY target/users-service-0.0.1-SNAPSHOT.war users-service-0.0.1-SNAPSHOT.war
-ENTRYPOINT ["java","-jar","users-service-0.0.1-SNAPSHOT.war"]
+FROM openjdk:11-slim
+COPY  target/users-service-0.0.1-SNAPSHOT.jar users-service-0.0.1-SNAPSHOT.jar
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait
+RUN chmod +x /wait
+#ENTRYPOINT ["java", "-jar", "/users-service-0.0.1-SNAPSHOT.jar"]
+CMD /wait && java -jar /users-service-0.0.1-SNAPSHOT.jar
