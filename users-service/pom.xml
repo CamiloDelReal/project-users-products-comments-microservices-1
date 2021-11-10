@@ -11,7 +11,7 @@
     <groupId>org.xapps.services</groupId>
     <artifactId>users-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>users-service</name>
     <description>users-service</description>
     <properties>
