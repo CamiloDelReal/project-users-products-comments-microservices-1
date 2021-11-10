@@ -11,7 +11,7 @@
     <groupId>org.xapps.services</groupId>
     <artifactId>comments-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>comments-service</name>
     <description>comments-service</description>
     <properties>
