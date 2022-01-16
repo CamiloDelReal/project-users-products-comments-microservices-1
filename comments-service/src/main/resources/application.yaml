@@ -36,11 +36,17 @@ logging:
     name: D:\\workspace\\project-users-products-comments-microservices-1\\logs\\${spring.application.name}.log
 
 security:
+  origins:
+    url: "*"
+    key: azerty123456
+    max-age: 3600
+    methods: GET, POST, PUT, DELETE
+    headers: Origin, Content-Type, Accept, Authorization
   claims:
     header-authorities: Autorities
     separator: --
   token:
-    value: 123
+    key: 123
     type: Test
     header-name: token
     validity: 18000000

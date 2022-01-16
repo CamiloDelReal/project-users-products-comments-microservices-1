@@ -5,7 +5,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.xapps.services.commentsservice.dtos.UserAuthenticated;
+import org.xapps.services.commentsservice.utils.ConfigProvider;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -28,18 +28,18 @@ import java.util.stream.Stream;
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
     private final Logger logger = LoggerFactory.getLogger(AuthorizationFilter.class);
-    private Environment env;
+    private final ConfigProvider configProvider;
 
-    public AuthorizationFilter(AuthenticationManager authenticationManager, Environment env) {
+    public AuthorizationFilter(AuthenticationManager authenticationManager, ConfigProvider configProvider) {
         super(authenticationManager);
-        this.env = env;
+        this.configProvider = configProvider;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (authHeader != null && authHeader.startsWith(env.getProperty("security.token.type"))) {
+        if (authHeader != null && authHeader.startsWith(configProvider.getTokenType())) {
             UsernamePasswordAuthenticationToken auth = getAuthentication(request);
             if (auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
@@ -57,22 +57,21 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (authHeader != null) {
-            String token = authHeader.replace(env.getProperty("security.token.type"), "");
-            String key = env.getProperty("security.token.value");
+            String token = authHeader.replace(configProvider.getTokenType(), "");
 
             try {
                 Claims claims = Jwts.parser()
-                        .setSigningKey(key)
+                        .setSigningKey(configProvider.getTokenKey())
                         .parseClaimsJws(token)
                         .getBody();
 
-                String[] subjectData = claims.getSubject().split(env.getProperty("security.claims.separator"));
+                String[] subjectData = claims.getSubject().split(configProvider.getAuthoritiesSeparator());
 
 
                 if(subjectData.length == 2 && !subjectData[0].isEmpty() && !subjectData[1].isEmpty()) {
                     UserAuthenticated user = new UserAuthenticated(Long.parseLong(subjectData[0]), subjectData[1]);
-                    String rolesClaim = claims.get(env.getProperty("security.claims.header-authorities"), String.class);
-                    user.setRoles(Stream.of(rolesClaim.split(env.getProperty("security.claims.separator"))).collect(Collectors.toList()));
+                    String rolesClaim = claims.get(configProvider.getHeaderAuthorities(), String.class);
+                    user.setRoles(Stream.of(rolesClaim.split(configProvider.getAuthoritiesSeparator())).collect(Collectors.toList()));
                     Collection<GrantedAuthority> roles = user.getRoles().stream()
                             .map(SimpleGrantedAuthority::new)
                             .collect(Collectors.toList());

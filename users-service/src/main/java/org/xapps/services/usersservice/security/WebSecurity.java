@@ -2,6 +2,8 @@ package org.xapps.services.usersservice.security;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
@@ -15,27 +17,45 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.xapps.services.usersservice.services.UserService;
+import org.xapps.services.usersservice.utils.ConfigProvider;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-    private Environment env;
-    private ObjectMapper objectMapper;
-    private UserService userService;
+    private final ObjectMapper objectMapper;
+    private final UserService userService;
+    private final ConfigProvider configProvider;
 
     @Autowired
-    public WebSecurity(Environment env, ObjectMapper objectMapper, @Lazy UserService userService) {
-        this.env = env;
+    public WebSecurity(ObjectMapper objectMapper, @Lazy UserService userService, ConfigProvider configProvider) {
         this.objectMapper = objectMapper;
         this.userService = userService;
+        this.configProvider = configProvider;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.cors().configurationSource(new CorsConfigurationSource() {
+            @Override
+            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                CorsConfiguration corsConfiguration = new CorsConfiguration();
+                corsConfiguration.setAllowedOrigins(List.of(configProvider.getOriginsUrl()));
+                corsConfiguration.setAllowedMethods(Arrays.asList(configProvider.getOriginsMethods()));
+                corsConfiguration.setAllowedHeaders(Arrays.asList(configProvider.getOriginsHeaders()));
+                corsConfiguration.setMaxAge(configProvider.getOriginsMaxAge());
+                return corsConfiguration;
+            }
+        });
         http
                 .authorizeRequests()
                 .antMatchers("/users").permitAll()
@@ -62,12 +82,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     private AuthenticationFilter providesAuthenticationFilter() throws Exception {
-        AuthenticationFilter authFilter = new AuthenticationFilter(authenticationManager(), env, objectMapper, userService);
+        AuthenticationFilter authFilter = new AuthenticationFilter(authenticationManager(), objectMapper, userService, configProvider);
         return authFilter;
     }
 
     private AuthorizationFilter providesAuthorizationFilter() throws Exception {
-        return new AuthorizationFilter(authenticationManager(), env, userService);
+        return new AuthorizationFilter(authenticationManager(), userService, configProvider);
     }
 
     @Bean

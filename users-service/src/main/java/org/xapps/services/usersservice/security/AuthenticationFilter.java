@@ -5,7 +5,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +15,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.xapps.services.usersservice.dtos.LoginRequest;
 import org.xapps.services.usersservice.entities.User;
 import org.xapps.services.usersservice.services.UserService;
+import org.xapps.services.usersservice.utils.ConfigProvider;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -30,16 +30,16 @@ import java.util.stream.Collectors;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private Environment env;
-    private ObjectMapper objectMapper;
-    private UserService userService;
+    private final ObjectMapper objectMapper;
+    private final UserService userService;
+    private final ConfigProvider configProvider;
 
     @Autowired
-    public AuthenticationFilter(AuthenticationManager authenticationManager, Environment env, ObjectMapper objectMapper, UserService userService) {
+    public AuthenticationFilter(AuthenticationManager authenticationManager, ObjectMapper objectMapper, UserService userService, ConfigProvider configProvider) {
         super(authenticationManager);
-        this.env = env;
         this.objectMapper = objectMapper;
         this.userService = userService;
+        this.configProvider = configProvider;
     }
 
     @Override
@@ -71,19 +71,18 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         Claims claims = Jwts.claims().setSubject(email);
         String roles = user.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(env.getProperty("security.claims.separator")));
-        claims.put(env.getProperty("security.claims.header-authorities"), roles);
-        String key = env.getProperty("security.token.value");
-        String subject = String.join(env.getProperty("security.claims.separator"), String.valueOf(userEntity.getId()), email);
+                .collect(Collectors.joining(configProvider.getAuthoritiesSeparator()));
+        claims.put(configProvider.getHeaderAuthorities(), roles);
+        String subject = String.join(configProvider.getAuthoritiesSeparator(), String.valueOf(userEntity.getId()), email);
         long issueAt = System.currentTimeMillis();
         String token = Jwts.builder()
                 .setClaims(claims)
                 .setIssuer("Issued by Camilo del Real")
                 .setSubject(subject)
                 .setIssuedAt(new Date(issueAt))
-                .setExpiration(new Date(issueAt + Long.parseLong(env.getProperty("security.token.validity"))))
-                .signWith(SignatureAlgorithm.HS256, key)
+                .setExpiration(new Date(issueAt + configProvider.getValidity()))
+                .signWith(SignatureAlgorithm.HS256, configProvider.getTokenKey())
                 .compact();
-        response.setHeader(env.getProperty("security.token.header-name"), token);
+        response.setHeader(configProvider.getHeaderAuthorities(), token);
     }
 }

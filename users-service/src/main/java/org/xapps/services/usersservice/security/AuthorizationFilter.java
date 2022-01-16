@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.xapps.services.usersservice.entities.User;
 import org.xapps.services.usersservice.services.UserService;
+import org.xapps.services.usersservice.utils.ConfigProvider;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -29,20 +30,20 @@ import java.util.stream.Collectors;
 
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
-    private Environment env;
-    private UserService userService;
+    private final UserService userService;
+    private final ConfigProvider configProvider;
 
-    public AuthorizationFilter(AuthenticationManager authenticationManager, Environment env, UserService userService) {
+    public AuthorizationFilter(AuthenticationManager authenticationManager, UserService userService, ConfigProvider configProvider) {
         super(authenticationManager);
-        this.env = env;
         this.userService = userService;
+        this.configProvider = configProvider;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        if (authHeader != null && authHeader.startsWith(env.getProperty("security.token.type"))) {
+        if (authHeader != null && authHeader.startsWith(configProvider.getTokenType())) {
             UsernamePasswordAuthenticationToken auth = getAuthentication(request);
             if(auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
@@ -61,15 +62,14 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
         if (authHeader != null) {
-            String token = authHeader.replace(env.getProperty("security.token.type"), "");
-            String key = env.getProperty("security.token.value");
+            String token = authHeader.replace(configProvider.getTokenType(), "");
             try {
                 Claims claims = Jwts.parser()
-                        .setSigningKey(key)
+                        .setSigningKey(configProvider.getTokenKey())
                         .parseClaimsJws(token)
                         .getBody();
 
-                String[] subjectData = claims.getSubject().split(env.getProperty("security.claims.separator"));
+                String[] subjectData = claims.getSubject().split(configProvider.getAuthoritiesSeparator());
 
                 if(subjectData.length == 2 && !subjectData[0].isEmpty() && !subjectData[1].isEmpty()) {
                     User user = userService.getByEmail(subjectData[1]);
@@ -88,9 +88,8 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private boolean isTokenExpired(String token) {
-        String key = env.getProperty("security.token.value");
         Claims claims = Jwts.parser()
-                .setSigningKey(key)
+                .setSigningKey(configProvider.getTokenKey())
                 .parseClaimsJws(token)
                 .getBody();
         Date expiration = claims.getExpiration();

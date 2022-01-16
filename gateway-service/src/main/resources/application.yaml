@@ -112,11 +112,21 @@ spring:
     username: test
     password: test
 
+security:
+  origins:
+    url: "*"
+    max-age: 3600
+    methods: GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD
+    headers: "*"
 
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://test:test@localhost:10200/eureka
+      defaultZone: http://guest:guest@localhost:10200/eureka
+    registerWithEureka: true
+    fetchRegistry: true
 
 # Must exposure only required uris
 management:
