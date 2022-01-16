@@ -58,7 +58,7 @@ services:
       SPRING_RABBITMQ_PASSWORD: guest
       SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS: /configurations
     volumes:
-      - "c:/workspace/project-users-products-comments-microservices-1/configurations:/configurations"
+      - "./../configurations:/configurations"
     ports:
       - "10100:10100"
     hostname: configuration
@@ -161,7 +161,7 @@ services:
       SECURITY_ORIGINS_METHODS: GET, POST, PUT, DELETE
       SECURITY_ORIGINS_HEADERS: Origin, Content-Type, Accept, Authorization
     volumes:
-      - "c:/workspace/project-users-products-comments-microservices-1/logs/users-service.log:/logs/users-service.log"
+      - "./../logs/users-service.log:/logs/users-service.log"
     ports:
       - "10400:10400"
     hostname: users
@@ -202,7 +202,7 @@ services:
       SECURITY_ORIGINS_METHODS: GET, POST, PUT, DELETE
       SECURITY_ORIGINS_HEADERS: Origin, Content-Type, Accept, Authorization
     volumes:
-      - "c:/workspace/project-users-products-comments-microservices-1/logs/products-service.log:/logs/products-service.log"
+      - "./../logs/products-service.log:/logs/products-service.log"
     ports:
       - "10500:10500"
     hostname: products
@@ -243,7 +243,7 @@ services:
       SECURITY_ORIGINS_METHODS: GET, POST, PUT, DELETE
       SECURITY_ORIGINS_HEADERS: Origin, Content-Type, Accept, Authorization
     volumes:
-      - "c:/workspace/project-users-products-comments-microservices-1/logs/comments-service.log:/logs/comments-service.log"
+      - "./../logs/comments-service.log:/logs/comments-service.log"
     ports:
       - "10600:10600"
     hostname: comments
