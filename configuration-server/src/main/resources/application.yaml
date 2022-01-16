@@ -10,7 +10,7 @@ spring:
     config:
       server:
         native:
-          search-locations: ${CONFIGURATION_PATH:D:\\workspace\\project-users-products-comments-microservices-1\\configurations}
+          search-locations: ${CONFIGURATION_PATH:c:\\workspace\\project-users-products-comments-microservices-1\\configurations}
     bus:
       enabled: true
       refresh:

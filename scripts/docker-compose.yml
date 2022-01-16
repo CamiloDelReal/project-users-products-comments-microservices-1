@@ -9,6 +9,9 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
     networks:
       - microservices1
       
@@ -55,7 +58,7 @@ services:
       SPRING_RABBITMQ_PASSWORD: guest
       SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCHLOCATIONS: /configurations
     volumes:
-      - "D:/workspace/project-users-products-comments-microservices-1/configurations:/configurations"
+      - "c:/workspace/project-users-products-comments-microservices-1/configurations:/configurations"
     ports:
       - "10100:10100"
     hostname: configuration
@@ -114,6 +117,10 @@ services:
       SPRING_RABBITMQ_PORT: 5672
       SPRING_RABBITMQ_USERNAME: guest
       SPRING_RABBITMQ_PASSWORD: guest
+      SECURITY_ORIGINS_URL: "*"
+      SECURITY_ORIGINS_ MAXAGE: 3600
+      SECURITY_ORIGINS_METHODS: GET, POST, PUT, DELETE, PATCH, OPTIONS, HEAD
+      SECURITY_ORIGINS_HEADERS: Origin, Content-Type, Accept, Authorization
     ports:
       - "10300:10300"
     hostname: gateway
@@ -149,8 +156,12 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       LOGGING_FILE_NAME: /logs/users-service.log
+      SECURITY_ORIGINS_URL: "*"
+      SECURITY_ORIGINS_ MAXAGE: 3600
+      SECURITY_ORIGINS_METHODS: GET, POST, PUT, DELETE
+      SECURITY_ORIGINS_HEADERS: Origin, Content-Type, Accept, Authorization
     volumes:
-      - "D:/workspace/project-users-products-comments-microservices-1/logs/users-service.log:/logs/users-service.log"
+      - "c:/workspace/project-users-products-comments-microservices-1/logs/users-service.log:/logs/users-service.log"
     ports:
       - "10400:10400"
     hostname: users
@@ -186,8 +197,12 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       LOGGING_FILE_NAME: /logs/products-service.log
+      SECURITY_ORIGINS_URL: "*"
+      SECURITY_ORIGINS_ MAXAGE: 3600
+      SECURITY_ORIGINS_METHODS: GET, POST, PUT, DELETE
+      SECURITY_ORIGINS_HEADERS: Origin, Content-Type, Accept, Authorization
     volumes:
-      - "D:/workspace/project-users-products-comments-microservices-1/logs/products-service.log:/logs/products-service.log"
+      - "c:/workspace/project-users-products-comments-microservices-1/logs/products-service.log:/logs/products-service.log"
     ports:
       - "10500:10500"
     hostname: products
@@ -223,8 +238,12 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
       LOGGING_FILE_NAME: /logs/comments-service.log
+      SECURITY_ORIGINS_URL: "*"
+      SECURITY_ORIGINS_ MAXAGE: 3600
+      SECURITY_ORIGINS_METHODS: GET, POST, PUT, DELETE
+      SECURITY_ORIGINS_HEADERS: Origin, Content-Type, Accept, Authorization
     volumes:
-      - "D:/workspace/project-users-products-comments-microservices-1/logs/comments-service.log:/logs/comments-service.log"
+      - "c:/workspace/project-users-products-comments-microservices-1/logs/comments-service.log:/logs/comments-service.log"
     ports:
       - "10600:10600"
     hostname: comments
