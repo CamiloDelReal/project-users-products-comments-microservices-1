@@ -68,3 +68,5 @@ Microservices-based application
 - Docker compose deployment script
 - You may need to configure some paths, credentials and urls inside configuration files based on you environment
 
+### ToDoS
+- Unit and Instrumentation tests
